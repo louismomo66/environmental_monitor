@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: devicel
+      POSTGRES_PASSWORD: postres1
+      POSTGRES_DB: logger
+    ports:
+      - "5433:5432"
+    volumes:
+      - my_db_data:/var/lib/postgresql/data
+
+  your-go-app:  # Replace with your Golang application service name
+    build: /Users/louiskwezi/Desktop/logger/back-end
+    depends_on:
+      - db
+    networks:
+      - my-network  # Replace with your desired network name
+
+volumes:
+  my_db_data:  # Define the volume here
+    # You can add options for volume configuration if needed
+    # For example:
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   device: /path/to/volume
+    #   o: bind
+
+networks:
+  my-network:  # Replace with your desired network name
