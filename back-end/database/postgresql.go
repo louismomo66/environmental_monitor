@@ -38,7 +38,7 @@ func ConnectDB() (*gorm.DB, error) {
 	}
 
 	// Auto-migrate models
-	err = conn.AutoMigrate(&models.Device{}, &models.Readings{})
+	err = conn.AutoMigrate(&models.Device{}, &models.Readings{},&models.User{})
 	if err != nil {
 		log.Printf("Failed to auto-migrate: %v", err)
 		return nil, err

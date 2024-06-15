@@ -13,3 +13,12 @@ func RespondWithJSON(w http.ResponseWriter, data interface{}) {
 		http.Error(w, "Failed to encode data", http.StatusInternalServerError)
 	}
 }
+type CustomError struct {
+	Message string `json:"message"`
+}
+
+func SetError(err error, msg string) CustomError {
+	return CustomError{
+		Message: msg + ": " + err.Error(),
+	}
+}
