@@ -28,20 +28,26 @@ func NewUserRepo(db *gorm.DB) * GormUserRepo{
 }
 
 type UserRepository interface {
-	GetUserByEmail( email string) ([]User,error)
+	GetUserByEmail( email string) (User,error)
 	CreateUser(user *User) error
 	GetUserEmail( email string) (string,error)
+	GetAllUsers() ([]User, error) 
 	
 }
 
-func (repo *GormUserRepo) GetUserByEmail( email string) ([]User,error) {
-	var user []User
-	err := repo.DB.Where("email=?",email).Find(&user).Error
-	if err != nil {
-		return nil,err
-	}
+func (repo *GormUserRepo) GetUserByEmail(email string) (User, error) {
+	var user User
+	err := repo.DB.Where("email = ?", email).First(&user).Error
 	return user, err
 }
+
+// In your repository file
+func (repo *GormUserRepo) GetAllUsers() ([]User, error) {
+	var users []User
+	err := repo.DB.Find(&users).Error
+	return users, err
+}
+
 func (repo *GormUserRepo) GetUserEmail( email string) (string,error) {
 	var user User
 	err := repo.DB.Where("email=?",email).First(&user).Error

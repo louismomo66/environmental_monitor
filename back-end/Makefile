@@ -19,7 +19,8 @@ test:
 # Clean up generated files
 clean:
 	rm -f$(DESTINATION)
-
+run:
+	go run main.go
 # Mark targets not associated with files
 .PHONY: all generate test clean
 

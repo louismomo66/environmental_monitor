@@ -18,7 +18,12 @@ type CustomError struct {
 }
 
 func SetError(err error, msg string) CustomError {
+	if err != nil {
+		return CustomError{
+			Message: msg + ": " + err.Error(),
+		}
+	}
 	return CustomError{
-		Message: msg + ": " + err.Error(),
+		Message: msg,
 	}
 }
