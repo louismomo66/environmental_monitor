@@ -31,7 +31,8 @@ type UserRepository interface {
 	GetUserByEmail( email string) (User,error)
 	CreateUser(user *User) error
 	GetUserEmail( email string) (string,error)
-	GetAllUsers() ([]User, error) 
+	GetAllUsers() ([]User, error)
+	UpdatePasswordByEmail(email, hashedPassword string) error 
 	
 }
 
@@ -58,4 +59,8 @@ func (repo *GormUserRepo) GetUserEmail( email string) (string,error) {
 }
 func (repo *GormUserRepo) CreateUser(user *User) error{
 	return repo.DB.Create(user).Error
+}
+
+func (repo *GormUserRepo)UpdatePasswordByEmail(email, hashedPassword string) error {
+	return repo.DB.Model(&User{}).Where("email = ?", email).Update("password",hashedPassword).Error
 }

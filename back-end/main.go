@@ -4,12 +4,12 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/louismomo66/logger/controllers"
 	"github.com/louismomo66/logger/database"
 	"github.com/louismomo66/logger/midelware"
 	"github.com/louismomo66/logger/models"
-	"github.com/gorilla/handlers"
 )
 
 func main() {
@@ -27,6 +27,8 @@ func main() {
 
 	r.HandleFunc("/signup", userController.SignUp).Methods("POST")
 	r.HandleFunc("/signin", userController.Login).Methods("POST")
+	r.HandleFunc("/forgot-password", userController.SentOTP).Methods("POST")
+	r.HandleFunc("/reset-password", userController.ResetPassword).Methods("POST")
 	r.HandleFunc("/admin", midelware.IsAuthorized(controllers.AdminIndex)).Methods("GET")
 	r.HandleFunc("/user", midelware.IsAuthorized(controllers.UserIndex)).Methods("GET")
 	r.HandleFunc("/getreadings", controller.GetReadings).Methods("GET")
