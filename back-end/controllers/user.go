@@ -19,8 +19,11 @@ type UserController struct {
 }
 
 
-func NewUserController(repo models.UserRepository) * UserController{
-	return &UserController{Repo:repo}
+func NewUserController(repo models.UserRepository, otpManager *helpers.OTPManager) *UserController {
+    return &UserController{
+        Repo:       repo,
+        OTPManager: otpManager,
+    }
 }
 
 

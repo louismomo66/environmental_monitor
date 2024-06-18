@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/louismomo66/logger/controllers"
 	"github.com/louismomo66/logger/database"
+	"github.com/louismomo66/logger/helpers"
 	"github.com/louismomo66/logger/midelware"
 	"github.com/louismomo66/logger/models"
 )
@@ -20,7 +21,8 @@ func main() {
 	repo := models.NewGormRepository(db)
 	userRepo := models.NewUserRepo(db)
 	controller := controllers.NewDeviceController(repo)
-	userController := controllers.NewUserController(userRepo)
+	otpManager := helpers.NewOTPManager()
+	userController := controllers.NewUserController( userRepo, otpManager)
 	r := mux.NewRouter()
 
 	// r.Use(midelware.EnableCORS)

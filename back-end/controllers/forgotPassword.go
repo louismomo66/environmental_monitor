@@ -81,7 +81,6 @@ if u.OTPManager. VeryfyOTP(request.Email,request.OTP){
 func (u UserController) ResetPassword(w http.ResponseWriter, r *http.Request){
 	var request struct {
 		Email string `json:"email"`
-		OTP string `json:"opt"`
 		NewPassword string `json:"newPassword"`
 	}
 
