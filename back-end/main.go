@@ -28,6 +28,7 @@ func main() {
 	r.HandleFunc("/signup", userController.SignUp).Methods("POST")
 	r.HandleFunc("/signin", userController.Login).Methods("POST")
 	r.HandleFunc("/forgot-password", userController.SentOTP).Methods("POST")
+	r.HandleFunc("/verify-otp", userController.VeryfyOTP).Methods("POST")
 	r.HandleFunc("/reset-password", userController.ResetPassword).Methods("POST")
 	r.HandleFunc("/admin", midelware.IsAuthorized(controllers.AdminIndex)).Methods("GET")
 	r.HandleFunc("/user", midelware.IsAuthorized(controllers.UserIndex)).Methods("GET")

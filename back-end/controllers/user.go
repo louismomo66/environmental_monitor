@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/louismomo66/logger/helpers"
 	"github.com/louismomo66/logger/midelware"
 	"github.com/louismomo66/logger/models"
 	"github.com/louismomo66/logger/utils"
@@ -14,6 +15,7 @@ import (
 
 type UserController struct {
 	Repo models.UserRepository
+	OTPManager *helpers.OTPManager
 }
 
 
